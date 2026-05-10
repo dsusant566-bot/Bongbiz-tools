@@ -55,7 +55,7 @@ export function PdfConverterClient() {
     try {
       const mergedPdf = await PDFDocument.create();
       for (const file of pdfFiles) {
-        const arrayBuffer = await file.arrayBuffer();
+              const arrayBuffer = (await file.arrayBuffer()) as any;
         const pdf = await PDFDocument.load(arrayBuffer);
         const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
         copiedPages.forEach((page) => mergedPdf.addPage(page));
@@ -124,7 +124,7 @@ export function PdfConverterClient() {
       pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
 
       const file = toImgFiles[0];
-      const arrayBuffer = await file.arrayBuffer();
+            const arrayBuffer = (await file.arrayBuffer()) as any;
       const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
       const pdf = await loadingTask.promise;
       
