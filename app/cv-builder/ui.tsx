@@ -18,7 +18,7 @@ export function CvBuilderClient() {
     skills: [] as string[]
   });
 
-  const previewRef = React.useRef(null);
+  const previewRef = React.useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({ contentRef: previewRef });
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +44,7 @@ export function CvBuilderClient() {
 
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-      <section className="bb-panel rounded-3xl p-6">
+      <section className="bb-panel rounded-3xl p-6 print:hidden">
         <h2 className="text-lg font-bold text-white mb-4">Personal Information</h2>
         <div className="space-y-4">
           <Field label="Photo"><Input type="file" accept="image/*" onChange={handlePhotoUpload} /></Field>
@@ -80,12 +80,12 @@ export function CvBuilderClient() {
           <Input placeholder="Add skill and press enter" onKeyDown={(e) => {
             if (e.key === "Enter") { setData({...data, skills: [...data.skills, e.currentTarget.value]}); e.currentTarget.value = ""; }
           }} />
-          <Button onClick={handlePrint}>Download PDF</Button>
+          <Button onClick={() => handlePrint()}>Download PDF</Button>
         </div>
       </section>
 
-      <section className="sticky top-20 h-fit">
-        <div ref={previewRef} className="mx-auto w-[210mm] min-h-[297mm] bg-white shadow-2xl p-10 text-black">
+      <section className="sticky top-20 h-fit print:col-span-2">
+        <div ref={previewRef} className="mx-auto w-[210mm] min-h-[297mm] bg-white shadow-2xl p-10 text-black print:shadow-none" style={{ breakInside: 'avoid', margin: 0, paddingBottom: 0, overflow: 'hidden' }}>
           <div className="flex justify-between">
             <div>
               <h1 className="text-3xl font-bold">{data.name}</h1>
@@ -98,7 +98,7 @@ export function CvBuilderClient() {
           <p className="mt-2 text-sm text-zinc-700">{data.summary}</p>
           <h2 className="text-lg font-semibold mt-6 border-b border-zinc-300">Experience</h2>
           {data.experience.map((exp, i) => (
-            <div key={i} className="mt-4 text-sm">
+            <div key={i} className="mt-4 text-sm" style={{ breakInside: 'avoid' }}>
               <div className="flex justify-between font-bold">
                 <p>{exp.company} | {exp.city}</p>
                 <p>{exp.duration}</p>
@@ -108,7 +108,7 @@ export function CvBuilderClient() {
           ))}
           <h2 className="text-lg font-semibold mt-6 border-b border-zinc-300">Education</h2>
           {data.education.map((edu, i) => (
-            <div key={i} className="mt-4 text-sm">
+            <div key={i} className="mt-4 text-sm" style={{ breakInside: 'avoid' }}>
               <div className="flex justify-between font-bold">
                 <p>{edu.school} | {edu.city}</p>
                 <p>{edu.duration}</p>

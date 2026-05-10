@@ -137,7 +137,7 @@ function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
         </Link>
       </div>
 
-      <div className="mt-3 space-y-2">
+      <div className="mt-3 max-h-[calc(100vh-160px)] space-y-2 overflow-y-auto">
         <NavSection
           title="Core"
           items={navCore}

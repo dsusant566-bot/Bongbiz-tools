@@ -48,3 +48,8 @@ body {
     0 0 0 1px rgba(255, 255, 255, 0.1) inset,
     0 0 0 4px var(--ring);
 }
+
+/* Force sRGB for PDF rendering context */
+body {
+  color-gamut: srgb;
+}

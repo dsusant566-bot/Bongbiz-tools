@@ -16,6 +16,7 @@ export function WhatsAppFloatButton({
       href={href}
       target="_blank"
       rel="noreferrer"
+      data-html2canvas-ignore
       className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-3 rounded-2xl bg-gradient-to-b from-emerald-300/95 to-emerald-400/80 px-4 py-3 text-sm font-semibold text-black shadow-[0_18px_55px_rgba(16,185,129,0.35)] ring-1 ring-emerald-200/40 transition hover:-translate-y-0.5 hover:from-emerald-200/95 hover:to-emerald-300/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
       aria-label="Chat on WhatsApp"
     >
