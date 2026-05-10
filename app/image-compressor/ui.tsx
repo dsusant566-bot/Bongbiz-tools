@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import imageCompression from "browser-image-compression";
+import imageCompression, { Options } from "browser-image-compression";
 import { Button, Field, Input, Select, Stat } from "../_components/ui";
 import { formatNumber } from "../_lib/format";
 
@@ -55,7 +55,7 @@ export function ImageCompressorClient() {
     }
     setBusy(true);
     try {
-      const options: imageCompression.Options = {
+            const options: Options = {
         maxSizeMB: 10,
         maxWidthOrHeight: Number.isFinite(mw) && mw > 0 ? mw : 1920,
         useWebWorker: true,
