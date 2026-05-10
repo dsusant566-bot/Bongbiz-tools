@@ -9,8 +9,11 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig: NextConfig = {
-  // এই লাইনটি যোগ করুন যাতে Turbopack এরর না দেয়
-  transpilePackages: ["next-pwa"], 
+  transpilePackages: ["next-pwa"],
+  // Attempt to resolve Turbopack conflict as per user instructions
+  // Note: 'turbopack' might not be a recognized property directly in NextConfig for all Next.js versions.
+  // This is a direct attempt based on user's suggestion.
+  turbopack: {},
 };
 
 export default withPWA(nextConfig);
