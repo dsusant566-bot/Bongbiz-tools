@@ -192,10 +192,17 @@ export function InvoiceClient() {
       body: tableData,
     });
     
-    const finalY = (doc as any).lastAutoTable.finalY + 10;
+    const finalY = (doc as any).lastAutoTable.finalY + 20;
     doc.text(`Subtotal: ${subtotal.toFixed(2)}`, 140, finalY);
     doc.text(`GST: ${gst.toFixed(2)}`, 140, finalY + 7);
     doc.text(`Total: ${total.toFixed(2)}`, 140, finalY + 14);
+
+    doc.text('Date: ________', 20, finalY + 40);
+    doc.text('Signature: ________', 140, finalY + 40);
+    
+    doc.setFontSize(8);
+    doc.setTextColor(150);
+    doc.text('BongoBiz Professional Invoice Maker', 105, 290, { align: 'center' });
     
     doc.save(`Invoice-${invoiceNo}.pdf`);
   }

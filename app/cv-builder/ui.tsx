@@ -85,6 +85,20 @@ export function CvBuilderClient() {
       body: eduData,
     });
     
+    let finalYEdu = (doc as any).lastAutoTable.finalY + 15;
+    
+    doc.setFontSize(12);
+    doc.text('Skills', 14, finalYEdu);
+    doc.setFontSize(10);
+    doc.text(doc.splitTextToSize(data.skills.join(', '), 180), 14, finalYEdu + 7);
+    
+    doc.text('Date: ________', 20, 270);
+    doc.text('Signature: ________', 140, 270);
+    
+    doc.setFontSize(8);
+    doc.setTextColor(150);
+    doc.text('BongoBiz Professional CV Builder', 105, 290, { align: 'center' });
+    
     doc.save(`CV-${data.name.replace(/\s+/g, '-')}.pdf`);
   };
 
