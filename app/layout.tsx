@@ -15,13 +15,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+import { baseMetadata } from "./metadata.config";
+
 export const metadata: Metadata = {
-  title: {
-    default: "BongoBiz Tools",
-    template: "%s · BongoBiz Tools",
-  },
-  description:
-    "Premium dark-themed utilities: Loan EMI, PDF converter, GST, currency, percentage, and age calculator.",
+  ...baseMetadata,
   manifest: "/manifest.json",
   icons: {
     apple: "/logo.png",

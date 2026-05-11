@@ -48,7 +48,7 @@ export default function Home() {
               accent="from-sky-300/20 to-emerald-300/10"
             />
             <ToolCard
-              href="/commodity-rates"
+              href="/gold-silver-rate"
               title="Gold & Silver Today's Rate"
               desc="Live market prices for Gold and Silver in India, including taxes."
               icon={<IconCoins />}
@@ -62,8 +62,8 @@ export default function Home() {
               accent="from-violet-300/20 to-cyan-300/10"
             />
             <ToolCard
-              href="/cv-builder"
-              title="CV Builder"
+              href="/cv-maker"
+              title="CV Maker"
               desc="Create your professional CV in your browser."
               icon={<IconEdit />}
               accent="from-blue-300/20 to-indigo-300/10"

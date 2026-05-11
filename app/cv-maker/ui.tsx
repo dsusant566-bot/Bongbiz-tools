@@ -97,7 +97,7 @@ export function CvBuilderClient() {
     
     doc.setFontSize(8);
     doc.setTextColor(150);
-    doc.text('BongoBiz Professional CV Builder', 105, 290, { align: 'center' });
+    doc.text('BongoBiz Professional CV Maker', 105, 290, { align: 'center' });
     
     doc.save(`CV-${data.name.replace(/\s+/g, '-')}.pdf`);
   };

@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ToolShell } from "../_components/tool-shell";
 import { CommodityRatesClient } from "./ui";
 
+import { baseMetadata } from "../metadata.config";
+
 export const metadata: Metadata = {
+  ...baseMetadata,
   title: "Gold & Silver Today's Rate",
-  description: "View live market prices for Gold, Silver, and Crude Oil in INR.",
 };
 
 export default function CommodityRatesPage() {

@@ -17,10 +17,10 @@ const navCore: NavItem[] = [
   { href: "/pdf-converter", label: "PDF Converter", icon: <IconFile /> },
   { href: "/gst", label: "GST", icon: <IconReceipt /> },
   { href: "/currency", label: "Currency", icon: <IconArrows /> },
-  { href: "/commodity-rates", label: "Gold & Silver Today's Rate", icon: <IconGoldBar /> },
+  { href: "/gold-silver-rate", label: "Gold & Silver Today's Rate", icon: <IconGoldBar /> },
   { href: "/percentage", label: "Percentage", icon: <IconPercent /> },
   { href: "/age", label: "Age", icon: <IconClock /> },
-  { href: "/cv-builder", label: "CV Builder", icon: <IconEdit /> },
+  { href: "/cv-maker", label: "CV Maker", icon: <IconEdit /> },
 ];
 
 const navPro: NavItem[] = [
