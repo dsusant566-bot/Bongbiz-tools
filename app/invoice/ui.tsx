@@ -160,8 +160,48 @@ export function InvoiceClient() {
     window.print();
   }
 
+  async function handleMobileDownload() {
+    const { jsPDF } = await import('jspdf');
+    const autoTable = (await import('jspdf-autotable')).default;
+    
+    const doc = new jsPDF();
+    
+    doc.setFontSize(18);
+    doc.text(businessName || 'INVOICE', 14, 20);
+    
+    doc.setFontSize(10);
+    doc.text(`Invoice #: ${invoiceNo}`, 14, 30);
+    doc.text(`Date: ${invoiceDate}`, 14, 35);
+    doc.text(`Due Date: ${dueDate}`, 14, 40);
+    
+    doc.text('Bill To:', 14, 55);
+    doc.text(billToName, 14, 60);
+    doc.text(billToAddress, 14, 65);
+    
+    const tableData = items.map((it) => {
+      const q = parseNum(it.qty) || 0;
+      const r = parseNum(it.rate) || 0;
+      const dPercent = parseNum(it.discount) || 0;
+      const itemTotal = (q * r) * (1 - dPercent / 100);
+      return [it.description, it.qty, r.toFixed(2), `${dPercent}%`, itemTotal.toFixed(2)];
+    });
+    
+    autoTable(doc, {
+      startY: 80,
+      head: [['Description', 'Qty', 'Rate', 'Disc%', 'Amount']],
+      body: tableData,
+    });
+    
+    const finalY = (doc as any).lastAutoTable.finalY + 10;
+    doc.text(`Subtotal: ${subtotal.toFixed(2)}`, 140, finalY);
+    doc.text(`GST: ${gst.toFixed(2)}`, 140, finalY + 7);
+    doc.text(`Total: ${total.toFixed(2)}`, 140, finalY + 14);
+    
+    doc.save(`Invoice-${invoiceNo}.pdf`);
+  }
+
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
+    <div id="printable-area" className="grid grid-cols-1 gap-6 lg:grid-cols-5">
       <section className="bb-panel rounded-3xl p-6 lg:col-span-2 print:hidden">
         <div className="flex flex-col gap-4">
           <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
@@ -230,9 +270,10 @@ export function InvoiceClient() {
             <Button type="button" variant="ghost" onClick={addItem}>
               + Add item
             </Button>
-            <Button type="button" onClick={printInvoice}>
-              Print / Save PDF
-            </Button>
+            <div className="flex gap-2">
+              <Button type="button" onClick={printInvoice}>Print</Button>
+              <Button type="button" onClick={handleMobileDownload} className="print:hidden">Mobile PDF</Button>
+            </div>
           </div>
 
           <div className="rounded-2xl bg-white/5 p-3 text-xs text-zinc-400 ring-1 ring-white/10">

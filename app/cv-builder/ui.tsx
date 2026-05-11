@@ -42,8 +42,54 @@ export function CvBuilderClient() {
     setData({...data, education: edu});
   };
 
+  const handleMobileSave = async () => {
+    const { jsPDF } = await import('jspdf');
+    const autoTable = (await import('jspdf-autotable')).default;
+    
+    const doc = new jsPDF();
+    
+    doc.setFontSize(22);
+    doc.text(data.name, 14, 20);
+    doc.setFontSize(14);
+    doc.text(data.title, 14, 28);
+    
+    if (data.photo) {
+      doc.addImage(data.photo, 'JPEG', 160, 10, 30, 30);
+    }
+    
+    doc.setFontSize(10);
+    doc.text(`${data.email} | ${data.phone} | ${data.address}`, 14, 38);
+    
+    doc.setFontSize(12);
+    doc.text('Summary', 14, 45);
+    doc.setFontSize(10);
+    doc.text(doc.splitTextToSize(data.summary, 180), 14, 52);
+    
+    const expData = data.experience.map(exp => [exp.company, exp.city, exp.duration, exp.desc]);
+    doc.setFontSize(12);
+    doc.text('Experience', 14, 70);
+    autoTable(doc, {
+      startY: 75,
+      head: [['Company', 'City', 'Duration', 'Description']],
+      body: expData,
+    });
+    
+    let finalY = (doc as any).lastAutoTable.finalY + 10;
+    
+    const eduData = data.education.map(edu => [edu.school, edu.city, edu.duration]);
+    doc.setFontSize(12);
+    doc.text('Education', 14, finalY);
+    autoTable(doc, {
+      startY: finalY + 5,
+      head: [['School', 'City', 'Duration']],
+      body: eduData,
+    });
+    
+    doc.save(`CV-${data.name.replace(/\s+/g, '-')}.pdf`);
+  };
+
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <div id="printable-area" className="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <section className="bb-panel rounded-3xl p-6 print:hidden">
         <h2 className="text-lg font-bold text-white mb-4">Personal Information</h2>
         <div className="space-y-4">
@@ -80,7 +126,10 @@ export function CvBuilderClient() {
           <Input placeholder="Add skill and press enter" onKeyDown={(e) => {
             if (e.key === "Enter") { setData({...data, skills: [...data.skills, e.currentTarget.value]}); e.currentTarget.value = ""; }
           }} />
-          <Button onClick={() => handlePrint()}>Download PDF</Button>
+          <div className="flex gap-2 pt-2">
+            <Button onClick={() => handlePrint()}>Download PDF</Button>
+            <Button onClick={handleMobileSave} className="bg-blue-600 hover:bg-blue-700">Mobile PDF</Button>
+          </div>
         </div>
       </section>
 

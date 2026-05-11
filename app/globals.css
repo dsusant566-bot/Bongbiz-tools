@@ -10,8 +10,8 @@
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: #050607;
+  --color-foreground: #f4f4f5;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -50,6 +50,9 @@ body {
 }
 
 /* Force sRGB for PDF rendering context */
+* {
+  color-interpolation-filters: sRGB !important;
+}
 body {
   color-gamut: srgb;
 }
