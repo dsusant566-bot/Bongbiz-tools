@@ -143,7 +143,7 @@ export function CurrencyClient() {
                 )}
               </div>
               <div className="mt-1 text-xs text-zinc-500">
-                {liveDate ? `As of ${liveDate}` : "ECB-based provider"}
+                {liveDate ? `As of ${new Date(liveDate).toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' })}` : "ER-API provider"}
               </div>
               {error ? <div className="mt-2 text-xs text-rose-300">{error}</div> : null}
             </div>

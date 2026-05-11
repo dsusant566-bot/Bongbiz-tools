@@ -1,9 +1,7 @@
-export const revalidate = 60; // cache for 60s
+export const dynamic = "force-dynamic";
 
-type FrankfurterResponse = {
-  amount: number;
-  base: string;
-  date: string;
+type ERAResponse = {
+  time_last_update_utc: string;
   rates: Record<string, number>;
 };
 
@@ -16,18 +14,15 @@ export async function GET(req: Request) {
     return Response.json({ error: "Invalid currency code" }, { status: 400 });
   }
   if (from === to) {
-    return Response.json({ from, to, rate: 1, date: new Date().toISOString() });
+    return Response.json({ from, to, rate: 1, date: new Date().toISOString().slice(0, 10) });
   }
 
-  // Frankfurter is a free ECB-based API (no key).
-  const url = `https://api.frankfurter.app/latest?from=${encodeURIComponent(
-    from
-  )}&to=${encodeURIComponent(to)}`;
+  // Using ExchangeRate-API (free, reliable)
+  const url = `https://open.er-api.com/v6/latest/${encodeURIComponent(from)}`;
 
   const res = await fetch(url, {
     headers: { accept: "application/json" },
-    // Revalidation hint for Next's data cache
-    next: { revalidate },
+    cache: "no-store",
   });
 
   if (!res.ok) {
@@ -37,7 +32,7 @@ export async function GET(req: Request) {
     );
   }
 
-  const data = (await res.json()) as FrankfurterResponse;
+  const data = (await res.json()) as ERAResponse;
   const rate = data.rates?.[to];
   if (typeof rate !== "number" || !Number.isFinite(rate)) {
     return Response.json({ error: "Rate missing" }, { status: 502 });
@@ -47,8 +42,8 @@ export async function GET(req: Request) {
     from,
     to,
     rate,
-    date: data.date,
-    source: "frankfurter.app",
+    date: data.time_last_update_utc,
+    source: "open.er-api.com",
   });
 }
 

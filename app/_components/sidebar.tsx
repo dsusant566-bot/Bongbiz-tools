@@ -17,6 +17,7 @@ const navCore: NavItem[] = [
   { href: "/pdf-converter", label: "PDF Converter", icon: <IconFile /> },
   { href: "/gst", label: "GST", icon: <IconReceipt /> },
   { href: "/currency", label: "Currency", icon: <IconArrows /> },
+  { href: "/commodity-rates", label: "Gold & Silver Today's Rate", icon: <IconGoldBar /> },
   { href: "/percentage", label: "Percentage", icon: <IconPercent /> },
   { href: "/age", label: "Age", icon: <IconClock /> },
   { href: "/cv-builder", label: "CV Builder", icon: <IconEdit /> },
@@ -420,6 +421,15 @@ function IconChevron() {
     </svg>
   );
 }
+function IconGoldBar() {
+  return (
+    <IconBase>
+      <rect x="3" y="6" width="18" height="12" rx="2" />
+      <path d="M12 6v12M8 6v12M16 6v12" />
+    </IconBase>
+  );
+}
+
 function IconMenu() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
@@ -432,6 +442,7 @@ function IconMenu() {
     </svg>
   );
 }
+
 function IconClose() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">

@@ -48,6 +48,13 @@ export default function Home() {
               accent="from-sky-300/20 to-emerald-300/10"
             />
             <ToolCard
+              href="/commodity-rates"
+              title="Gold & Silver Today's Rate"
+              desc="Live market prices for Gold and Silver in India, including taxes."
+              icon={<IconCoins />}
+              accent="from-amber-300/20 to-yellow-300/10"
+            />
+            <ToolCard
               href="/percentage"
               title="Percentage Calculator"
               desc="Percent of, percent change, and reverse percent."
@@ -238,6 +245,15 @@ function IconBase({ children }: { children: React.ReactNode }) {
 }
 
 {/* --- নতুন PDF Editor আইকন --- */}
+function IconCoins() {
+  return (
+    <IconBase>
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2v20M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </IconBase>
+  );
+}
+
 function IconEdit() {
   return (
     <IconBase>

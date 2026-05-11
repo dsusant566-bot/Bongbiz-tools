@@ -170,13 +170,30 @@ export function InvoiceClient() {
     doc.text(businessName || 'INVOICE', 14, 20);
     
     doc.setFontSize(10);
-    doc.text(`Invoice #: ${invoiceNo}`, 14, 30);
-    doc.text(`Date: ${invoiceDate}`, 14, 35);
-    doc.text(`Due Date: ${dueDate}`, 14, 40);
+    let sellerY = 25;
+    if (businessPhone) {
+        doc.text(`Phone: ${businessPhone}`, 14, sellerY);
+        sellerY += 5;
+    }
+    if (businessAddress) {
+        doc.text(businessAddress, 14, sellerY);
+        sellerY += 10;
+    } else {
+        sellerY += 5;
+    }
     
-    doc.text('Bill To:', 14, 55);
-    doc.text(billToName, 14, 60);
-    doc.text(billToAddress, 14, 65);
+    doc.text(`Invoice #: ${invoiceNo}`, 14, sellerY);
+    doc.text(`Date: ${invoiceDate}`, 14, sellerY + 5);
+    doc.text(`Due Date: ${dueDate}`, 14, sellerY + 10);
+    
+    doc.text('Bill To:', 14, sellerY + 25);
+    doc.text(billToName, 14, sellerY + 30);
+    doc.text(billToAddress, 14, sellerY + 35);
+    let billToY = sellerY + 40;
+    if (billToPhone) {
+        doc.text(`Phone: ${billToPhone}`, 14, billToY);
+        billToY += 5;
+    }
     
     const tableData = items.map((it) => {
       const q = parseNum(it.qty) || 0;
@@ -187,7 +204,7 @@ export function InvoiceClient() {
     });
     
     autoTable(doc, {
-      startY: 80,
+      startY: billToY + 5,
       head: [['Description', 'Qty', 'Rate', 'Disc%', 'Amount']],
       body: tableData,
     });
