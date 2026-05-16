@@ -69,6 +69,13 @@ export default function Home() {
               accent="from-blue-300/20 to-indigo-300/10"
             />
             <ToolCard
+              href="/translator"
+              title="Language Translator"
+              desc="Fast translation between multiple languages."
+              icon={<IconGlobe />}
+              accent="from-emerald-300/20 to-sky-300/10"
+            />
+            <ToolCard
               href="/age"
               title="Age Calculator"
               desc="Years/months/days, next birthday countdown, time lived."
@@ -123,6 +130,13 @@ export default function Home() {
               desc="Convert normal text to bold Unicode styles."
               icon={<IconText />}
               accent="from-zinc-300/10 to-violet-300/10"
+            />
+            <ToolCard
+              href="/text-to-speech"
+              title="Text to Speech"
+              desc="Convert your text to spoken audio files."
+              icon={<IconSpeaker />}
+              accent="from-emerald-300/20 to-sky-300/10"
             />
             <ToolCard
               href="/captions"
@@ -244,7 +258,16 @@ function IconBase({ children }: { children: React.ReactNode }) {
   );
 }
 
-{/* --- নতুন PDF Editor আইকন --- */}
+function IconGlobe() {
+  return (
+    <IconBase>
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+      <path d="M2 12h20" />
+    </IconBase>
+  );
+}
+
 function IconCoins() {
   return (
     <IconBase>
@@ -376,6 +399,16 @@ function IconCar() {
     </IconBase>
   );
 }
+function IconSpeaker() {
+  return (
+    <IconBase>
+      <path d="M11 5L6 9H2v6h4l5 4V5z" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+    </IconBase>
+  );
+}
+
 function IconText() {
   return (
     <IconBase>

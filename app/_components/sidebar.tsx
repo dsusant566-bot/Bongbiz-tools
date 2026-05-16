@@ -21,6 +21,8 @@ const navCore: NavItem[] = [
   { href: "/percentage", label: "Percentage", icon: <IconPercent /> },
   { href: "/age", label: "Age", icon: <IconClock /> },
   { href: "/cv-maker", label: "CV Maker", icon: <IconEdit /> },
+  { href: "/translator", label: "Language Translator", icon: <IconGlobe /> },
+  { href: "/text-to-speech", label: "Text to Speech", icon: <IconSpeaker /> },
 ];
 
 const navPro: NavItem[] = [
@@ -252,6 +254,26 @@ function IconBase({
     >
       {children}
     </svg>
+  );
+}
+
+function IconGlobe() {
+  return (
+    <IconBase>
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+      <path d="M2 12h20" />
+    </IconBase>
+  );
+}
+
+function IconSpeaker() {
+  return (
+    <IconBase>
+      <path d="M11 5L6 9H2v6h4l5 4V5z" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+    </IconBase>
   );
 }
 

@@ -20,7 +20,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/invoice',
     '/vehicle-info',
     '/bold-text',
-    '/captions'
+    '/captions',
+    '/text-to-speech',
+    '/translator'
   ]
 
   return paths.map((path) => ({
